@@ -23,32 +23,32 @@ import (
 // +genclient
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
 
-// DepSvcController is a specification for a DepSvcController resource
-type DepSvcController struct {
+// DepSvcResource is a specification for a DepSvcResource resource
+type DepSvcResource struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
 
-	Spec   DepSvcControllerSpec   `json:"spec"`
-	Status DepSvcControllerStatus `json:"status"`
+	Spec   DepSvcResourceSpec   `json:"spec"`
+	Status DepSvcResourceStatus `json:"status"`
 }
 
-// DepSvcControllerSpec is the spec for a DepSvcController resource
-type DepSvcControllerSpec struct {
+// DepSvcResourceSpec is the spec for a DepSvcResource resource
+type DepSvcResourceSpec struct {
 	DeploymentName string `json:"deploymentName"`
 	Replicas       *int32 `json:"replicas"`
 }
 
-// DepSvcControllerStatus is the status for a DepSvcController resource
-type DepSvcControllerStatus struct {
+// DepSvcResourceStatus is the status for a DepSvcResource resource
+type DepSvcResourceStatus struct {
 	AvailableReplicas int32 `json:"availableReplicas"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
 
-// DepSvcControllerList is a list of DepSvcController resources
-type DepSvcControllerList struct {
+// DepSvcResourceList is a list of DepSvcResource resources
+type DepSvcResourceList struct {
 	metav1.TypeMeta `json:",inline"`
 	metav1.ListMeta `json:"metadata"`
 
-	Items []DepSvcController `json:"items"`
+	Items []DepSvcResource `json:"items"`
 }
