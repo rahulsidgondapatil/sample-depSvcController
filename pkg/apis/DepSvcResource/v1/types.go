@@ -1,6 +1,9 @@
 package v1
 
-import metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
+import (
+	v1 "k8s.io/api/apps/v1"
+	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
+)
 
 // +genclient
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -9,23 +12,13 @@ import metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 type DepSvcResource struct {
 	metav1.TypeMeta `json:",inline"`
 	// +optional
-	metav1.ObjectMeta `json:"metadata,omitempty"`
+	metav1.ObjectMeta `json:"metadata,omitempty" protobuf:"bytes,1,opt,name=metadata"`
 
 	// +optional
-	Status DepSvcResourceStatus `json:"status,omitempty"`
+	Status v1.DeploymentStatus `json:"spec,omitempty" protobuf:"bytes,2,opt,name=spec"`
 	// This is where you can define
 	// your own custom spec
-	Spec DepSvcResourceSpec `json:"spec,omitempty"`
-}
-
-// custom spec
-type DepSvcResourceSpec struct {
-	Message string `json:"message,omitempty"`
-}
-
-// custom status
-type DepSvcResourceStatus struct {
-	Name string
+	Spec v1.DeploymentSpec `json:"status,omitempty" protobuf:"bytes,3,opt,name=status"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
